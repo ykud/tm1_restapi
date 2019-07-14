@@ -93,6 +93,7 @@ def main (argv):
 					try:
 						checkView(cube.name, prview, True, tm1, subsetList)
 					except Exception:
+                        # this means it's an MDX view and we should process it better, but I don't care about it at this point
 						logging.error('Error in processing view ' + prview )
 						subsetList.append({'Cube':cube.name, 'View':prview, 'Dimension':'Error', 'Subset':'Error'})
 						num_errors += 1
@@ -103,6 +104,7 @@ def main (argv):
 					try:
 						checkView(cube.name, pubview, False, tm1, subsetList)
 					except Exception:
+                        # this means it's an MDX view and we should process it better, but I don't care about it at this point
 						logging.error('Error in processing view ' + pubview)
 						subsetList.append({'Cube':cube.name, 'View':pubview, 'Dimension':'Error', 'Subset':'Error'})
 						num_errors += 1
