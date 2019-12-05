@@ -1,0 +1,109 @@
+rest-client.timeoutinmilliseconds:0
+# TM1 settings
+# IP or servername where TM1 server runs
+@tm1server_ip=192.168.174.169
+# HTTP Port Number in tm1s.cfg
+@tm1server_port=12345
+@tm1_url=https://{{tm1server_ip}}:{{tm1server_port}}
+# Integrated Security 1 credentials
+@tm1_user_name=admin
+@tm1_user_password=apple
+
+# git credentials
+@git_user_name=xyz
+@git_user_password=password
+@git_user_email=email@email
+@git_repo_url=repo_url
+
+###
+#Simple check to see if we're connected to server -- will return the server metadata
+GET {{tm1_url}}/api/v1/$metadata HTTP/1.1
+
+### Get server configuration -- server name 
+GET {{tm1_url}}/api/v1/Configuration HTTP/1.1
+content-type: application/json
+Authorization: Basic {{tm1_user_name}} {{tm1_user_password}}
+
+### 
+#Git Init
+POST {{tm1_url}}/api/v1/GitInit HTTP/1.1
+Authorization: Basic {{tm1_user_name}} {{tm1_user_password}}
+content-type: application/json
+
+{
+"URL": "{{git_repo_url}}",
+"Deployment": "dev",
+"Username": "{{git_user_name}}",
+"Password": "{{git_user_password}}",
+"Force": true
+}
+
+### 
+# Check GitStatus
+POST {{tm1_url}}/api/v1/GitStatus HTTP/1.1
+Authorization: Basic {{tm1_user_name}} {{tm1_user_password}}
+content-type: application/json
+
+{
+"Username": "{{git_user_name}}",
+"Password": "{{git_user_password}}"
+}
+
+### Detach Git repo
+POST {{tm1_url}}/api/v1/GitUninit HTTP/1.1
+Authorization: Basic {{tm1_user_name}} {{tm1_user_password}}
+content-type: application/json
+
+
+### 
+# Push code to repo -- 1st time the Branch should be empty 
+# we're defining the 'base' or our code 
+# ideall should be production server, doing dev now
+# Create a push plan that will push the whole model to git
+POST {{tm1_url}}/api/v1/GitPush HTTP/1.1
+Authorization: Basic {{tm1_user_name}} {{tm1_user_password}}
+content-type: application/json
+
+{
+  "Branch": "master",
+  "NewBranch":"prod",
+  "Force": true,
+  "Message": "initial git push",
+  "Author": "{{git_user_name}}",
+  "Email": "{{git_user_email}}",
+  "Username": "{{git_user_name}}",
+  "Password": "{{git_user_password}}"
+}
+
+### List plans 
+GET {{tm1_url}}/api/v1/GitPlans HTTP/1.1
+Authorization: Basic {{tm1_user_name}} {{tm1_user_password}}
+content-type: application/json
+
+@git_push_plan_id=git_plan_id
+### Execute push plan
+POST {{tm1_url}}/api/v1/GitPlans('{{git_push_plan_id}}')/tm1.Execute HTTP/1.1
+Authorization: Basic {{tm1_user_name}} {{tm1_user_password}}
+content-type: application/json
+
+### Pull the whole repo to new server
+POST {{tm1_url}}/api/v1/GitPull
+Authorization: Basic {{tm1_user_name}} {{tm1_user_password}}
+content-type: application/json
+
+{
+  "Branch": "master",
+  "ExecutionMode": "SingleCommit",
+  "Force": true,
+  "Username": "{{git_user_name}}",
+  "Password": "{{git_user_password}}"
+}
+
+@git_pull_plan_id=git_plan_id
+### Execute pull plan
+POST {{tm1_url}}/api/v1/GitPlans('{{git_pull_plan_id}}')/tm1.Execute HTTP/1.1
+Authorization: Basic {{tm1_user_name}} {{tm1_user_password}}
+content-type: application/json
+
+### Logout
+GET {{tm1_url}}/api/logout HTTP/1.1
