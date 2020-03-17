@@ -1,0 +1,422 @@
+{
+	"info": {
+		"_postman_id": "f9e9ca8a-c7e7-4ae8-99fa-a21d83b4b3fa",
+		"name": "tm1 git",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "TM1Project",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{tm1_user_password}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{tm1_user_name}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://{{tm1server_ip}}:{{tm1server_port}}/api/v1/!tm1project",
+					"protocol": "https",
+					"host": [
+						"{{tm1server_ip}}"
+					],
+					"port": "{{tm1server_port}}",
+					"path": [
+						"api",
+						"v1",
+						"!tm1project"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TM1Project",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{tm1_user_password}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{tm1_user_name}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"Version\": \"1.0\",\n    \"Objects\": {\n        \"Cubes\": {\n            \"Link\": \"/all_cubes.json\"\n        },\n        \"Dimensions\": {\n            \"Link\": \"/all_dimensions.json\"\n        },\n        \"Processes\": {\n            \"Link\": \"/all_processes.json\"\n        },\n        \"Files\": [\n            \"/}Applications/*\"\n        ]\n    },\n    \"Deployment\": {\n        \"deploy\": {\n            \"Objects\": {\n                \"Processes('test_process')\": {}\n            },\n            \"Ignore\": [\n                \"Cubes/Views\",\n                \"Dimensions/Hierarchies/Subsets\",\n                \"Processes\"\n            ]\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{tm1server_ip}}:{{tm1server_port}}/api/v1/!tm1project",
+					"protocol": "https",
+					"host": [
+						"{{tm1server_ip}}"
+					],
+					"port": "{{tm1server_port}}",
+					"path": [
+						"api",
+						"v1",
+						"!tm1project"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GitStatus",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{tm1_user_password}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{tm1_user_name}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json; charset=utf-8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"Username\": \"{{git_user_name}}\",\n\"Password\": \"{{git_user_password}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{tm1server_ip}}:{{tm1server_port}}/api/v1/GitStatus",
+					"protocol": "https",
+					"host": [
+						"{{tm1server_ip}}"
+					],
+					"port": "{{tm1server_port}}",
+					"path": [
+						"api",
+						"v1",
+						"GitStatus"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GitUninit",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{tm1_user_password}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{tm1_user_name}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json; charset=utf-8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{tm1server_ip}}:{{tm1server_port}}/api/v1/GitUninit",
+					"protocol": "https",
+					"host": [
+						"{{tm1server_ip}}"
+					],
+					"port": "{{tm1server_port}}",
+					"path": [
+						"api",
+						"v1",
+						"GitUninit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GitPlans",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{tm1_user_password}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{tm1_user_name}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json; charset=utf-8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{tm1server_ip}}:{{tm1server_port}}/api/v1/GitPlans",
+					"protocol": "https",
+					"host": [
+						"{{tm1server_ip}}"
+					],
+					"port": "{{tm1server_port}}",
+					"path": [
+						"api",
+						"v1",
+						"GitPlans"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GitPull",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{tm1_user_password}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{tm1_user_name}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json; charset=utf-8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{tm1server_ip}}:{{tm1server_port}}/api/v1/GitPlans",
+					"protocol": "https",
+					"host": [
+						"{{tm1server_ip}}"
+					],
+					"port": "{{tm1server_port}}",
+					"path": [
+						"api",
+						"v1",
+						"GitPlans"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GitPush",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{tm1_user_password}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{tm1_user_name}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json; charset=utf-8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"Branch\": \"dev\",\n  \"NewBranch\":\"uat\",\n  \"Force\": false,\n  \"Message\": \"creating uat branch\",\n  \"Author\": \"{{git_user_name}}\",\n  \"Email\": \"{{git_user_email}}\",\n  \"Username\": \"{{git_user_name}}\",\n  \"Password\": \"{{git_user_password}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{tm1server_ip}}:{{tm1server_port}}/api/v1/GitPush",
+					"protocol": "https",
+					"host": [
+						"{{tm1server_ip}}"
+					],
+					"port": "{{tm1server_port}}",
+					"path": [
+						"api",
+						"v1",
+						"GitPush"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GitPlan Execute",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{tm1_user_password}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{tm1_user_name}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json; charset=utf-8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"Branch\": \"dev\",\n  \"NewBranch\":\"uat\",\n  \"Force\": false,\n  \"Message\": \"creating uat branch\",\n  \"Author\": \"{{git_user_name}}\",\n  \"Email\": \"{{git_user_email}}\",\n  \"Username\": \"{{git_user_name}}\",\n  \"Password\": \"{{git_user_password}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{tm1server_ip}}:{{tm1server_port}}/api/v1/GitPush",
+					"protocol": "https",
+					"host": [
+						"{{tm1server_ip}}"
+					],
+					"port": "{{tm1server_port}}",
+					"path": [
+						"api",
+						"v1",
+						"GitPush"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
